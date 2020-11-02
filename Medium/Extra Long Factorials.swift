@@ -93,12 +93,9 @@ struct Num {
     }
 }
 
-
-
 func test1() {
     let a = Num(string: "26")
     let b = Num(string: "169")
-    
     print((a*b).string == "4394")
     
 }
@@ -106,9 +103,20 @@ func test1() {
 func test2() {
     let a = Num(string: "169")
     let b = Num(string: "26")
-
-
     print((a*b).string == "4394")
 }
 
+func test3() {
+    let a = Num(string: "123123")
+    let b = Num(string: "5325532")
+    print((a*b).string == "655695476436")
+}
+func test4() {
+    let a = Num(string: "99")
+    let b = Num(string: "9999999")
+    print((a*b).string == "989999901")
+}
 test1() 
+test2()
+test3()
+test4()
