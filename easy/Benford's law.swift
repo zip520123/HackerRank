@@ -70,8 +70,12 @@ func f3(_ n: Int) {
 
     for _ in 2...n {
         res = a+b
-        let s = Array(res.value)[0]
-        dict[s,default:0] += 1
+        let arr = Array(res.value)
+        // let s = arr[arr.count - 1]
+        for c in arr {
+            dict[c,default:0] += 1    
+        } 
+        
         a = b
         b = res
     }
