@@ -1,5 +1,5 @@
 /*Max Array Sum*/
-
+//time O(n) space O(1)
 func maxSubsetSum(arr: [Int]) -> Int {
     var incl = arr[0]
     var excl = 0
