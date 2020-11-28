@@ -49,7 +49,7 @@ func freqQuery(queries: [[Int]]) -> [Int] {
                     dict2[dict[value, default:0], default:0] -= 1
                 }
                 if dict[value,default: 0] > 0 {
-                    dict[value] -= 1
+                    dict[value,default: 0] -= 1
                 } 
                 
                 dict2[dict[value,default: 0], default: 0] += 1
