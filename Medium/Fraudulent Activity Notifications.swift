@@ -25,53 +25,93 @@
 //     }
 //     return res
 // }
-//time O(n + n * d / 2)
-func activityNotifications(expenditure: [Int], d: Int) -> Int {
-    var countingList = Array<Int>(repeating:0, count:200)
-    var end = d
-    for i in 0..<end {
-        countingList[expenditure[i]] += 1
-    }
+//time O(n + n * d / 2) d <= 200, -> O(n + n * 100) -> O(n)
+// func activityNotifications(expenditure: [Int], d: Int) -> Int {
+//     var countingList = Array<Int>(repeating:0, count:200)
+//     var end = d
+//     for i in 0..<end {
+//         countingList[expenditure[i]] += 1
+//     }
     
-    var notifications = 0
-    var medianPosition = d / 2
-    if d % 2 == 0 {
-    } else {
-        medianPosition = d / 2 + 1
-    }
+//     var notifications = 0
+//     var medianPosition = d / 2
+//     if d % 2 == 0 {
+//     } else {
+//         medianPosition = d / 2 + 1
+//     }
 
-    func getMedian() -> Double {
-        var counter = 0, left = 0
-        while counter < medianPosition {
-            counter += countingList[left]
-            left += 1
-        }
-        var right = left
-        left -= 1
-        if counter > medianPosition || d % 2 != 0 {
-            return Double(left)
-        } else {
-            while countingList[right] == 0 {
-                right += 1
-            }
-            return Double(left + right) / Double(2)
-        }
-    }
+//     func getMedian() -> Double {
+//         var counter = 0, left = 0
+//         while counter < medianPosition {
+//             counter += countingList[left]
+//             left += 1
+//         }
+//         var right = left
+//         left -= 1
+//         if counter > medianPosition || d % 2 != 0 {
+//             return Double(left)
+//         } else {
+//             while countingList[right] == 0 {
+//                 right += 1
+//             }
+//             return Double(left + right) / Double(2)
+//         }
+//     }
 
-    let ecount = expenditure.count
+//     let ecount = expenditure.count
+//     var curr = 0
+//     while(end < ecount) {
+//         let median = getMedian()
+//         if Double(expenditure[end]) >= median * 2 {
+//             notifications += 1
+//         }
+//         countingList[expenditure[curr]] -= 1
+//         countingList[expenditure[end]] += 1
+//         curr += 1
+//         end += 1
+//     }
+
+//     return notifications
+// }
+
+func activityNotifications(expenditure: [Int], d: Int) -> Int {
+    var res = 0
+    var list = Array<Int>(repeating:0,count: 200)
     var curr = 0
-    while(end < ecount) {
-        let median = getMedian()
-        if Double(expenditure[end]) >= median * 2 {
-            notifications += 1
+    for (i,n) in expenditure.enumerated() {
+        list[n] += 1
+        if i >= d {
+            var median = d / 2
+            if d % 2 == 1 {
+                median += 1
+            }
+            var count = 0
+            var left = 0
+            while(count < median) {
+                count += list[left]
+                left += 1
+            }
+            var right = left
+            left -= 1
+            var m : Double = 0
+            if count > median || d % 2 == 1 {
+                m = Double(left)
+            } else {
+                while list[right] == 0 {
+                    right += 1
+                }
+                m = (Double(left) + Double(right)) / 2
+            }
+            
+            if m * 2 <= Double(n) {
+                res += 1
+            }
+            
+            list[expenditure[curr]] -= 1
+            curr += 1  
         }
-        countingList[expenditure[curr]] -= 1
-        countingList[expenditure[end]] += 1
-        curr += 1
-        end += 1
     }
-
-    return notifications
+    return res
 }
 
 let input = [1,2,3,4,4]
