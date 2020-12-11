@@ -73,7 +73,7 @@
 
 //     return notifications
 // }
-
+//time O(n + n * d / 2) d <= 200, -> O(n + n * 100) -> O(n)
 func activityNotifications(expenditure: [Int], d: Int) -> Int {
     var res = 0
     var list = Array<Int>(repeating:0,count: 200)
